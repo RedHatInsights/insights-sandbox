@@ -10,29 +10,39 @@ Strategy
   to run the rules.
 - Create a sandbox for the rules using [bubblewrap (bwrap)](https://github.com/containers/bubblewrap).
     - Enable only required linux namespaces (see `man namespaces` for more info).
-    - TODO: Investigate user and cgroups settings.
+    - TODO: Investigate cgroups settings.
 - Communicate with the sandbox using [zeromq](https://zeromq.org/languages/python/) over named pipes.
     - zmq hides underlying buffer details (`man 7 pipe` for fifos).
-    - `work` pipe carries local paths to archives from the outside process to
-      the inside process.
-    - `results` pipe carries analysis results from the inside process to the
-      outside process.
+    - `work` pipe carries a serialized Broker to the inside process.
+    - `results` pipe carries analysis results from the inside process to the outside process.
 
 
 Installation
 ------------
 ```
-sudo dnf install bwrap
+CentOS 7:
+yum install epel-release
+yum install bubblewrap
+
+Fedora:
+dnf install epel-release
+dnf install bubblewrap
+
+Both:
 python3 -m venv .
 . bin/activate
-pip install pyzmq
+pip install insights-core dill pyzmq
+
 mkfifo work results
 ```
 
 
-Run the test
+Test an archive
 ------------
 ```
-./producer.py &
-./bubblewrap.sh
+# this runs forever or until it gets a protocol.DONE message from the producer.
+./consumer.sh -p examples.rules
+
+# Run this in a separate terminal.
+./producer.py <path to archive> | jq .
 ```

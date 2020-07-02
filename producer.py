@@ -1,36 +1,61 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+import argparse
 import os
+
+from contextlib import contextmanager
+
+import dill
 import zmq
 
+from insights import dr
+from insights.core.archives import extract
+from insights.core.hydration import create_context
 
-MSG = b"\x00"
-DONE = b"\x01"
+from protocol import DONE, MSG
 
-ctx = zmq.Context()
-work = ctx.socket(zmq.PUSH)
 
-# set the max queue size or "high water mark" in terms of sent messages (not
-# bytes, etc.) ipc connections block by default.
-work.set_hwm(2)
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument("archive")
+    return p.parse_args()
 
-work_path = os.path.expandvars("ipc://$PWD/work")
-print(work_path)
-work.bind(work_path)
 
-results = ctx.socket(zmq.PULL)
+@contextmanager
+def make_pipes():
+    ctx = zmq.Context()
+    # set the max queue size or "high water mark" in terms of sent messages
+    # (not bytes, etc.) ipc connections block by default.
+    work_path = os.path.expandvars("ipc://$PWD/work")
+    work = ctx.socket(zmq.PUSH)
+    work.set_hwm(2)
+    work.bind(work_path)
 
-results_path = os.path.expandvars("ipc://$PWD/results")
-print(results_path)
-results.bind(results_path)
+    results_path = os.path.expandvars("ipc://$PWD/results")
+    results = ctx.socket(zmq.PULL)
+    results.bind(results_path)
+
+    yield (work, results)
+
+    work.close()
+    results.close()
 
 
 # fifos have a default buffer size of 64k, but zmq abstracts over that for us.
-task = "a" * 12800000
-for r in range(10):
-    print(f"Send: {len(task)}")
-    work.send_multipart([MSG, task.encode("utf-8")])
-    payload = results.recv().decode("utf-8")
+def main():
+    args = parse_args()
 
-work.send_multipart([DONE, b""])
-work.close()
-results.close()
+    with make_pipes() as (work, results):
+        with extract(args.archive) as extraction:
+            broker = dr.Broker()
+            ctx = create_context(extraction.tmp_dir)
+            broker[ctx.__class__] = ctx
+
+            work.send_multipart([MSG, dill.dumps(broker)])
+            payload = results.recv().decode("utf-8")
+            print(payload)
+
+            # work.send_multipart([DONE, b""])
+
+
+if __name__ == "__main__":
+    main()
