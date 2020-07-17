@@ -10,8 +10,8 @@ from contextlib import contextmanager
 
 import zmq
 
-from sandbox.controller import Controller
-from sandbox.adapter import RunnerAdapter
+from insights_sandbox.controller import Controller
+from insights_sandbox.adapter import RunnerAdapter
 
 
 @contextmanager

@@ -1,6 +1,6 @@
-from sandbox.controller import Controller
-from sandbox.protocol import Setup, Process, Stop
-from sandbox.tests import IO
+from insights_sandbox.controller import Controller
+from insights_sandbox.protocol import Setup, Process, Stop
+from insights_sandbox.tests import IO
 
 
 def handle_setup(payload):

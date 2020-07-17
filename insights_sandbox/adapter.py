@@ -3,8 +3,8 @@ import dill
 from insights import dr
 from insights.formats._json import JsonFormat
 
-from sandbox.runner import Runner
-from sandbox.protocol import Setup, Process, Responses
+from insights_sandbox.runner import Runner
+from insights_sandbox.protocol import Setup, Process, Responses
 
 
 class RunnerAdapter:

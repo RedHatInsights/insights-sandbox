@@ -1,7 +1,7 @@
 import traceback
 
 import dill
-from sandbox.protocol import Commands, Error, Okay, Results
+from insights_sandbox.protocol import Commands, Error, Okay, Results
 
 
 class Controller:

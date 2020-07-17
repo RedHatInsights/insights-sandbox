@@ -1,5 +1,5 @@
-from sandbox.controller import Processing, Starting
-from sandbox import protocol
+from insights_sandbox.controller import Processing, Starting
+from insights_sandbox import protocol
 
 
 class MockController:

@@ -5,7 +5,7 @@ This script is only for testing the sandbox.
 import argparse
 
 from insights import dr, parse_plugins
-from sandbox.client import Client
+from insights_sandbox.client import Client
 
 
 def parse_args():

@@ -1,8 +1,8 @@
 import pytest
 
-from sandbox.tests import IO
-from sandbox.adapter import RunnerAdapterProxy
-from sandbox.protocol import Error, Okay, Results
+from insights_sandbox.tests import IO
+from insights_sandbox.adapter import RunnerAdapterProxy
+from insights_sandbox.protocol import Error, Okay, Results
 
 
 def test_setup():

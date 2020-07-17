@@ -19,7 +19,7 @@ Client <-> runner adapter proxy <-> named pipes <-> [controller <-> runner adapt
 ```
 
 The `Client` creates named pipes and a child process that uses `bwrap` to
-invoke `sandbox.consumer`.
+invoke `insights_sandbox.consumer`.
 
 The client creates an `RunnerAdapterProxy` and configures it with `zmq`
 functions for sending and recieving messages over the pipes. The proxy is

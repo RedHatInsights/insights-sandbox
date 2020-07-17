@@ -12,7 +12,7 @@ import tempfile
 import zmq
 
 from insights.core.archives import extract
-from sandbox.adapter import RunnerAdapterProxy
+from insights_sandbox.adapter import RunnerAdapterProxy
 
 log = logging.getLogger(__name__)
 
@@ -37,7 +37,7 @@ class Client:
                 --unshare-uts \\
                 --unshare-user \\
                 --die-with-parent \\
-                python3 -m sandbox.consumer -c ${INSIGHTS_COMM_PATH:-/tmp})
+                python3 -m insights_sandbox.consumer -c ${INSIGHTS_COMM_PATH:-/tmp})
     """.strip()
 
     def __init__(
