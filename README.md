@@ -1,17 +1,29 @@
 Sandbox
 =======
-Run rules in a sandbox with no network access and filesystem access only to
-the archive working directory.
+Run rules with access only to necessary binaries and the archive working
+directory.
 
 
 Strategy
 --------
-- Create a sandbox for the rules using [bubblewrap (bwrap)](https://github.com/containers/bubblewrap).
+- Create a sandbox using [bubblewrap (bwrap)](https://github.com/containers/bubblewrap).
     - Enable only required linux namespaces (see `man namespaces` for more info).
 - Communicate with the sandbox using [zeromq](https://zeromq.org/languages/python/) over named pipes.
     - zmq hides underlying buffer details (`man 7 pipe` for fifos).
-    - `work` pipe carries a serialized Broker to the inside process.
-    - `results` pipe carries analysis results from the inside process to the outside process.
+
+
+Architecture
+------------
+```
+Client <-> runner adapter proxy <-> named pipes <-> [controller <-> runner adapter <-> runner]
+```
+
+The `Client` creates named pipes and a child process that uses `bwrap` to
+invoke `sandbox.consumer`.
+
+The client creates an `RunnerAdapterProxy` and configures it with `zmq`
+functions for sending and recieving messages over the pipes. The proxy is
+used to setup the `Runner` via the `Controller` and `RunnerAdapter`.
 
 
 Installation

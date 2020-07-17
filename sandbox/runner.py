@@ -14,11 +14,11 @@ from insights.core.hydration import create_context
 from insights.formats._json import JsonFormat
 
 
-class Engine:
+class Runner:
     """
-    Runs rules components from the configured packages. It returns a
-    dictionary containing the formatted output along with timings and
-    traceback data if requested.
+    Runs components from the configured packages. Returns a dictionary
+    containing the formatted output along with timings and traceback data if
+    requested.
     """
 
     def __init__(
@@ -80,31 +80,3 @@ class Engine:
             for e in es:
                 results[name].append(broker.tracebacks[e])
         return dict(results)
-
-
-class EngineAdapter:
-    """
-    Provides the setup and process methods used by the Controller.
-    Digs options and data out of the raw dictionaries sent over the wire
-    and delegates to the underlying Engine.
-    """
-
-    def __init__(self):
-        self._engine = None
-
-    def setup(self, config):
-        self._engine = Engine(
-            packages=config.get("packages", []),
-            Format=dr.get_component(config["format"])
-            if "format" in config
-            else JsonFormat,
-            include_timings=config.get("include_timings", False),
-            include_tracebacks=config.get("include_tracebacks", False),
-            target_components=config.get("target_components", []),
-            component_config=config.get("component_config", {}),
-        )
-
-    def process(self, payload):
-        broker = payload["broker"]
-        path = payload["path"]
-        return self._engine.process(path, broker=broker)

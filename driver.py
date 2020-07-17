@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+This script is only for testing the sandbox.
+"""
 import argparse
 
 from insights import dr, parse_plugins

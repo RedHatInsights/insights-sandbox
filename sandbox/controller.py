@@ -6,25 +6,8 @@ from sandbox.protocol import Commands, Error, Okay, Results
 
 class Controller:
     """
-    Drives a state machine for controlling an insights engine with a very
-    simple protocol.
-
-    The states are "starting," "processing," "stopping," and "stopped."
-
-    The commands are SETUP, PROCESS, and STOP.
-
-    Responses are OKAY, ERROR, or RESULTS.
-
-    Any errors or invalid commands in any state transition the machine to
-    "stopping" followed by "stopped."
-
-    SETUP transitions the machine from starting to processing. Responses are
-    OKAY or ERROR.
-
-    PROCESS tells the machine to process an archive. Responses are RESULTS or
-    ERROR.
-
-    STOP tells the machine to shut down. Response is OKAY.
+    Drives a state machine that controls an ``Runner`` via the
+    setup and process methods of an ``RunnerAdapter``.
 
     Arguments:
         setup (function): Function that handles the SETUP command's payload.
