@@ -78,7 +78,7 @@ class Starting(State):
             self.transition_to("processing")
             return Okay()
 
-        raise Exception(f"Invalid Command.")
+        raise Exception("Invalid Command.")
 
 
 class Processing(State):
@@ -86,4 +86,4 @@ class Processing(State):
         if cmd == Commands.PROCESS:
             return Results(self._action(payload))
 
-        raise Exception(f"Invalid Command")
+        raise Exception("Invalid Command")
