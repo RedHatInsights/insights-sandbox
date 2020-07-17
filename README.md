@@ -40,7 +40,7 @@ dnf install bubblewrap
 Both:
 python3 -m venv .
 . bin/activate
-pip install insights-core dill pyzmq
+pip install -e .[develop]
 
 ```
 

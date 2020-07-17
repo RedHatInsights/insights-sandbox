@@ -37,7 +37,7 @@ class Client:
                 --unshare-uts \\
                 --unshare-user \\
                 --die-with-parent \\
-                python3 -m insights_sandbox.consumer -c ${INSIGHTS_COMM_PATH:-/tmp})
+                python3 -m insights_tsandbox.consumer -c ${INSIGHTS_COMM_PATH:-/tmp})
     """.strip()
 
     def __init__(
@@ -67,7 +67,7 @@ class Client:
                 timings.
             include_tracebacks (bool): whether results should include all
                 tracebacks encountered.
-            tmp_dir (str): The temporary directing to use for extracting
+            tmp_dir (str): The temporary directory to use for extracting
                 archives.
             comm_dir (str): The directory to use for creating named pipes
                 used for communication with the sandbox.

@@ -5,8 +5,9 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 
 runtime = set([
-    "insights-core"
-    "zmq",
+    "insights-core",
+    "dill",
+    "pyzmq",
 ])
 
 develop = set([
@@ -14,6 +15,7 @@ develop = set([
     "black",
     "pytest",
     "setuptools",
+    "IPython",
 ])
 
 docs = set([

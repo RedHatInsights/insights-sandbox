@@ -6,8 +6,8 @@ from insights_sandbox.protocol import Commands, Error, Okay, Results
 
 class Controller:
     """
-    Drives a state machine that controls an ``Runner`` via the
-    setup and process methods of an ``RunnerAdapter``.
+    Drives a state machine that controls a ``Runner`` via the
+    setup and process methods of a ``RunnerAdapter``.
 
     Arguments:
         setup (function): Function that handles the SETUP command's payload.
