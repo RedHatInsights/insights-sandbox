@@ -14,12 +14,12 @@ from sandbox.protocol import Setup, Process, Responses
 log = logging.getLogger(__name__)
 
 
-def _make_pipes(work_path, results_path, hwm=2):
+def _make_pipes(work_path, results_path):
     ctx = zmq.Context()
     # set the max queue size or "high water mark" in terms of sent messages
     # (not bytes, etc.) ipc connections block by default.
     work = ctx.socket(zmq.PUSH)
-    work.set_hwm(hwm)
+    work.set_hwm(1)
     work_path = "ipc://" + work_path
     work.bind(work_path)
 

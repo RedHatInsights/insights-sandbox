@@ -22,7 +22,7 @@ def make_pipes(work_path, results_path):
     # (not bytes, etc.) ipc connections block by default.
     results_path = "ipc://" + os.path.expandvars(results_path)
     results = ctx.socket(zmq.PUSH)
-    results.set_hwm(2)
+    results.set_hwm(1)
     results.connect(results_path)
 
     yield (work, results)
