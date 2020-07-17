@@ -1,5 +1,5 @@
-Sandbox
-=======
+Insights Sandbox
+================
 Run rules with access only to necessary binaries and the archive working
 directory.
 

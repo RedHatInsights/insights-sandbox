@@ -34,7 +34,7 @@ if __name__ == "__main__":
         description="bubblewrap sandbox for insights components.",
         long_description=long_description,
         long_description_content_type="text/markdown",
-        url="https://gitlab.cee.redhat.com/csams/sandbox",
+        url="https://github.com/RedHatInsights/insights-sandbox",
         author="Christopher Sams",
         author_email="csams@redhat.com",
         packages=find_packages(),
