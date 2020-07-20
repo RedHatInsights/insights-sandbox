@@ -15,6 +15,7 @@ develop = set([
     "black==19.10b0",
     "pytest==5.4.3",
     "setuptools==41.6.0",
+    "wheel==0.34.2",
     "IPython==7.16.1",
 ])
 
@@ -29,7 +30,7 @@ if __name__ == "__main__":
         long_description = f.read()
 
     setup(
-        name="insights_sandbox",
+        name="insights-sandbox",
         version="0.1.0",
         description="bubblewrap sandbox for insights components.",
         long_description=long_description,
