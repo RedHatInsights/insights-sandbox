@@ -6,16 +6,16 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 runtime = set([
     "insights-core",
-    "dill",
-    "pyzmq",
+    "dill==0.3.2",
+    "pyzmq==19.0.0",
 ])
 
 develop = set([
-    "flake8",
-    "black",
-    "pytest",
-    "setuptools",
-    "IPython",
+    "flake8==3.8.3",
+    "black==19.10b0",
+    "pytest==5.4.3",
+    "setuptools==41.6.0",
+    "IPython==7.16.1",
 ])
 
 docs = set([
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     setup(
         name="insights_sandbox",
-        version="0.0.1",
+        version="0.1.0",
         description="bubblewrap sandbox for insights components.",
         long_description=long_description,
         long_description_content_type="text/markdown",
