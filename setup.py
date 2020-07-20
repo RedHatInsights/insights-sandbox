@@ -46,7 +46,7 @@ if __name__ == "__main__":
             "docs": list(docs),
         },
         classifiers=[
-            "Development Status :: 2 - Beta",
+            "Development Status :: 4 - Beta",
             "Intended Audience :: Developers",
             "Natural Language :: English",
             "License :: OSI Approved :: Apache Software License",
