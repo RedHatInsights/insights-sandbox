@@ -24,7 +24,7 @@ class Runner:
     def __init__(
         self,
         packages=None,
-        Format=JsonFormat,
+        format=JsonFormat,
         include_timings=False,
         include_tracebacks=False,
         target_components=None,
@@ -38,7 +38,7 @@ class Runner:
         apply_configs(config)
         target_components = [dr.get_component(c) for c in target_components or []]
 
-        self._Format = Format
+        self._Format = format
         self._include_timings = include_timings
         self._include_tracebacks = include_tracebacks
         self._target_components = target_components or None

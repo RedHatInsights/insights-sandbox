@@ -20,7 +20,7 @@ class RunnerAdapter:
     def setup(self, config):
         self._runner = Runner(
             packages=config.get("packages", []),
-            Format=dr.get_component(config["format"])
+            format=dr.get_component(config["format"])
             if "format" in config
             else JsonFormat,
             include_timings=config.get("include_timings", False),
