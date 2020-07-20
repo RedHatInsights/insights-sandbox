@@ -19,8 +19,8 @@ develop = set([
 ])
 
 docs = set([
-    "Sphinx",
-    "sphinx_rtd_theme",
+    "Sphinx==3.1.2",
+    "sphinx_rtd_theme==0.5.0",
 ])
 
 
